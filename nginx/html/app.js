@@ -14,8 +14,9 @@ document.querySelector('#refresh-views').addEventListener('click', () => {
 document.querySelector('#download-button').addEventListener('click', async event => {
   const button = event.currentTarget; button.disabled = true;
   try {
-    const ids = {title:'project-title',summary:'project-summary',features:'project-features',technology:'project-technology'};
-    const data = Object.fromEntries(Object.entries(ids).map(([key,id]) => [key,document.getElementById(id).innerText.trim()]));
+    // tagline·details는 선택 항목이라 요소가 없으면 빈 문자열로 보냅니다.
+    const ids = {title:'project-title',tagline:'project-tagline',summary:'project-summary',features:'project-features',technology:'project-technology',details:'project-details'};
+    const data = Object.fromEntries(Object.entries(ids).map(([key,id]) => [key,document.getElementById(id)?.innerText.trim() ?? '']));
     const response = await fetch('/api/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     if (!response.ok) throw new Error((await response.json()).error || '다운로드 실패');
     const url = URL.createObjectURL(await response.blob());

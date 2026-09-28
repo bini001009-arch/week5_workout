@@ -4,3 +4,7 @@ h1{font-size:2.3rem;margin:10px 0}h2{font-size:1.35rem}section{background:white;
 label{display:block;font-weight:700;margin:14px 0 6px}input,select,textarea{box-sizing:border-box;width:100%;font:inherit;padding:10px;border:1px solid #8094a8;border-radius:5px}
 textarea{min-height:150px}button,.link{font:inherit;color:white;background:#185f9e;padding:10px 19px;border:0;border-radius:5px;cursor:pointer;display:inline-block;margin-top:12px}
 button:disabled{opacity:.6}a{color:#175b94}small,.eyebrow{color:#49667d}.result{padding:12px 0;white-space:pre-wrap}.error{color:#b32f30}li{margin:9px 0}footer{color:#49667d}
+.tagline{font-size:1.1rem;margin:0 0 8px}.deploy{font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.chip{border:1px solid #d3e0eb;color:#49667d;padding:2px 12px;border-radius:999px;font-size:.9rem}.chip.goal{border-color:#206bb0;color:#185f9e;font-weight:700}
+ul.cards,ul.tech,ul.details{padding-left:20px}.cards strong,.tech strong,.details strong{color:#185f9e}
+.actions{display:flex;flex-wrap:wrap;gap:10px}.actions button{margin-top:0}

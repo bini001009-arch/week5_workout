@@ -5,8 +5,7 @@ app.config['MAX_CONTENT_LENGTH'] = 64 * 1024
 
 @app.get('/api/health')
 def health():
-    # TODO: student_id와 name을 본인의 학번과 이름으로 변경하세요.
-    return jsonify(status='ok', student_id='본인 학번', name='본인 이름')
+    return jsonify(status='ok', student_id='2024030', name='박용빈')
 
 @app.errorhandler(413)
 def too_large(error):
@@ -35,18 +34,28 @@ def views():
         count = db.execute('SELECT count FROM page_views WHERE id=1').fetchone()[0]
     return jsonify(views=count)
 
+def bullets(value):
+    # 화면 목록(li)은 innerText에서 줄 단위로 오므로 Markdown 목록으로 바꿉니다.
+    lines = [line.strip() for line in value.splitlines() if line.strip()]
+    return '\n'.join(line if line.startswith('- ') else f'- {line}' for line in lines)
+
 @app.post('/api/download')
 def download():
     data = request.get_json(silent=True)
     fields = ['title', 'summary', 'features', 'technology']
     if not isinstance(data, dict) or any(not isinstance(data.get(k), str) or not data[k].strip() for k in fields):
         return jsonify(error='프로젝트명·소개·주요 기능·사용 기술을 모두 작성하세요.'), 400
-    if any(len(data[k]) > 5000 for k in fields):
+    optional = {k: data.get(k) if isinstance(data.get(k), str) else '' for k in ['tagline', 'details']}
+    if any(len(v) > 5000 for v in [*(data[k] for k in fields), *optional.values()]):
         return jsonify(error='각 항목은 5,000자 이내로 작성하세요.'), 400
-    text = (f"# {data['title'].strip()}\n\n"
-            f"## 프로젝트 소개\n{data['summary'].strip()}\n\n"
-            f"## 주요 기능\n{data['features'].strip()}\n\n"
-            f"## 사용 기술\n{data['technology'].strip()}\n")
+    text = f"# {data['title'].strip()}\n\n"
+    if optional['tagline'].strip():
+        text += f"> {optional['tagline'].strip()}\n\n"
+    text += (f"## 프로젝트 소개\n{data['summary'].strip()}\n\n"
+             f"## 주요 기능\n{bullets(data['features'])}\n\n"
+             f"## 사용 기술\n{bullets(data['technology'])}\n")
+    if optional['details'].strip():
+        text += f"\n## 팀 소개 · 프로젝트 정보\n{bullets(optional['details'])}\n"
     return send_file(BytesIO(text.encode('utf-8')), as_attachment=True,
                      download_name='project-intro.md', mimetype='text/markdown; charset=utf-8')
 

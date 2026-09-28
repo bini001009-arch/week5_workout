@@ -1,9 +1,75 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>나의 캡스톤 소개</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head>
-<body><main><header><p class="eyebrow">WEEK 5 · CAPSTONE</p><h1 id="project-title">TODO: 프로젝트 이름</h1><p>누적 조회수 <strong id="view-count">불러오는 중</strong></p></header>
-<!-- TODO: AI를 활용해 디자인과 소개 내용을 완성하세요. 아래 id는 API 연결에 사용하므로 유지하세요. -->
-<section><h2>프로젝트 소개</h2><p id="project-summary">TODO: 프로젝트 목적과 해결할 문제를 소개하세요.</p></section>
-<section><h2>주요 기능</h2><div id="project-features">TODO: 주요 기능을 구체적으로 작성하세요.</div></section>
-<section><h2>사용 기술</h2><p id="project-technology">TODO: 사용 기술과 역할을 적으세요.</p></section>
-<section><h2>팀 소개</h2><p>TODO: 팀원과 역할을 작성하세요.</p></section>
-<button id="download-button">소개 내용 다운로드 (.md)</button><button id="refresh-views">조회수 다시 확인</button><p id="message" class="result" aria-live="polite"></p>
-<footer><a href="/api/health">API 연결 확인</a><p>페이지를 열거나 새로고침하면 조회수가 증가합니다.</p></footer></main></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>케어마켓(CareMarket) · 캡스톤 소개</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="app.js"></script>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <p class="eyebrow">WEEK 5 · CAPSTONE PROJECT</p>
+    <h1 id="project-title">케어마켓(CareMarket)</h1>
+    <p id="project-tagline" class="tagline">건강 목표·영양 조건 기반 맞춤형 건강식품 쇼핑몰</p>
+    <div class="hero-bar">
+      <p class="views">누적 조회수 <strong id="view-count">불러오는 중</strong></p>
+      <a class="deploy" href="https://caremarket.vercel.app/" target="_blank" rel="noopener">caremarket.vercel.app ↗</a>
+    </div>
+  </header>
+
+  <!-- 아래 id는 app.js와 API 연결에 사용하므로 유지합니다. -->
+  <section>
+    <h2>프로젝트 소개</h2>
+    <p id="project-summary">사용자가 건강 목표(근육량 증가 / 체중 관리 / 식단 영양 관리 / 영양제 탐색)와 보조조건(저당·저염·고단백·카페인 제외·알레르기 제외)을 고르면, 조건에 맞는 영양제·프로틴·웰니스 간편식을 추천하는 쇼핑몰입니다.</p>
+    <div class="chips" aria-label="건강 목표와 보조조건">
+      <span class="chip goal">근육량 증가</span><span class="chip goal">체중 관리</span><span class="chip goal">식단 영양 관리</span><span class="chip goal">영양제 탐색</span>
+      <span class="chip">저당</span><span class="chip">저염</span><span class="chip">고단백</span><span class="chip">카페인 제외</span><span class="chip">알레르기 제외</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>주요 기능</h2>
+    <div id="project-features">
+      <ul class="cards">
+        <li><strong>자연어 검색 → 정형 조건 변환</strong> — “단백질 많고 당 적은 간식” 같은 문장을 목표·보조조건 필터로 바꿔 검색합니다.</li>
+        <li><strong>장바구니 영양성분 실시간 합산·검증</strong> — 담은 상품의 영양성분을 합산하고 선택한 조건을 벗어나는지 확인합니다.</li>
+        <li><strong>토스페이먼츠 테스트 결제 + 서버 재고 차감</strong> — 결제 승인 후 서버에서 재고를 차감합니다.</li>
+        <li><strong>구매자·관리자 권한 분리</strong> — 구매자는 쇼핑·주문, 관리자는 상품·재고·주문 관리를 담당합니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>사용 기술</h2>
+    <div id="project-technology">
+      <ul class="tech">
+        <li><strong>프론트엔드:</strong> React · Vite · Tailwind CSS</li>
+        <li><strong>백엔드·DB:</strong> Supabase (PostgreSQL · Auth)</li>
+        <li><strong>AI:</strong> Gemini API (자연어 검색 조건 변환)</li>
+        <li><strong>결제:</strong> Toss Payments (테스트 결제)</li>
+        <li><strong>배포:</strong> Vercel</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>팀 소개 · 프로젝트 정보</h2>
+    <ul id="project-details" class="details">
+      <li><strong>팀:</strong> 개인 프로젝트</li>
+      <li><strong>개발 기간:</strong> 2026.09.03 ~ 09.21</li>
+      <li><strong>배포 주소:</strong> <a href="https://caremarket.vercel.app/" target="_blank" rel="noopener">https://caremarket.vercel.app/</a></li>
+    </ul>
+  </section>
+
+  <div class="actions">
+    <button id="download-button">소개 내용 다운로드 (.md)</button>
+    <button id="refresh-views" class="secondary">조회수 다시 확인</button>
+  </div>
+  <p id="message" class="result" aria-live="polite"></p>
+
+  <footer><a href="/api/health">API 연결 확인</a><p>페이지를 열거나 새로고침하면 조회수가 증가합니다.</p></footer>
+</main>
+</body>
+</html>

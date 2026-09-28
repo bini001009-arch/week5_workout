@@ -1,20 +1,20 @@
-# TODO: README를 참고해 빌드 폴더, 공개 포트와 저장 경로·볼륨를 완성하세요.
+# 빌드 폴더, 공개 포트와 저장 경로·볼륨을 README 기준으로 완성했습니다.
 name: week5hw
 services:
   api:
-    build: TODO_API_DIRECTORY
+    build: ./api
     image: week5_03
     container_name: week5_api02
     environment:
-      DATA_DIR: TODO_DATA_DIRECTORY
+      DATA_DIR: /data
     volumes:
-      - TODO_VOLUME:/data
+      - data:/data
   nginx:
-    build: TODO_WEB_DIRECTORY
+    build: ./nginx
     image: week5_04
     container_name: week5_web02
     ports:
-      - "TODO_HOST_PORT:80"
+      - "8080:80"
     depends_on:
       - api
 networks:
